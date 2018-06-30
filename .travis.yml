@@ -11,4 +11,4 @@ before_install:
 
 script:
   - make cover
-  - $GOPATH/bin/goveralls -service=travis-ci
+  - goveralls -coverprofile=coverage.out -service=travis-ci
