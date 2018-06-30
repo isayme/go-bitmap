@@ -17,6 +17,7 @@ func TestBitmap(t *testing.T) {
 		for i = 0; i < 8; i++ {
 			bitmap.Set(i)
 			require.Equal(bitmap.length, i+1)
+			require.Equal(bitmap.Lenght(), i+1)
 			require.Equal(len(bitmap.data), 1)
 
 			data |= (0x01 << i)
@@ -34,6 +35,17 @@ func TestBitmap(t *testing.T) {
 		require.Equal(len(bitmap.data), 2)
 		require.Equal(bitmap.data[0], byte(0x00))
 		require.Equal(bitmap.data[1], byte(0x01))
+	})
+
+	t.Run("Has", func(t *testing.T) {
+		require := require.New(t)
+
+		bitmap := New()
+		bitmap.Set(0)
+
+		require.Equal(bitmap.Has(0), true)
+		require.Equal(bitmap.Has(1), false)
+		require.Equal(bitmap.Has(100), false)
 	})
 
 	t.Run("duplicate set", func(t *testing.T) {
